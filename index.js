@@ -40,8 +40,13 @@ function toggleReadStatus(bookId) {
     displayBooks();
 }
 
+// some example book objects added to myLibrary
 addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 1178, false);
 addBookToLibrary("The Hobbit", "J.R.R. Tolkien", 310, true);
+addBookToLibrary("Harry Potter and the Sorcerer's Stone", "J.K. Rowling", 309, true);
+addBookToLibrary("1984", "George Orwell", 328, false);
+addBookToLibrary("To Kill a Mockingbird", "Harper Lee", 281, true);
+addBookToLibrary("The Alchemist", "Paulo Coelho", 208, false);
 
 // dom references
 const bookCards = document.querySelector('.book-cards');
@@ -69,6 +74,8 @@ function displayBooks() {
         // apply class and data-id attribute
         bookCard.setAttribute('data-book-id', book.id);
         bookCard.classList.add('book-card');
+        buttonRemove.classList.add('remove-btn');
+        buttonToggleReadStatus.classList.add('toggle-btn');
         
         // content insertion
         titlePara.textContent = `Title: ${book.title}`;
@@ -79,6 +86,14 @@ function displayBooks() {
 
         // for read status
         readStatusPara.textContent = book.read ? 'Read' : 'Not Read Yet';
+
+        // add status class for when book is read or not for css
+        if (book.read) {
+            readStatusPara.classList.add('status-read');
+        }
+        else {
+            readStatusPara.classList.add('status-unread');
+        }
 
         // Event Listener
         buttonRemove.addEventListener('click', () => {
